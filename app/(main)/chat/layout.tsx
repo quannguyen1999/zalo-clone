@@ -9,7 +9,7 @@ export const Chat = ({
         <>
             <div className="">
                 <ChatSidebar/>
-
+                
                 xx
                 {childrens}
             </div>
