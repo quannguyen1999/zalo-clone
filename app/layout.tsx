@@ -1,9 +1,11 @@
 import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Open_Sans } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import { cn } from "@/lib/utils";
+import { ThemeProvider } from '@/components/provider/theme-provider';
+import { NavigationSidebar } from '@/components/navigation/navigation-sidebar';
+const font = Open_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,9 +18,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressContentEditableWarning>
       <ClerkProvider>
-        <body className={inter.className}>{children}</body>
+        <body className={cn(font.className,
+          "bg-white dark:bg-[#313338]"
+          )}>
+            <ThemeProvider attribute='class'
+              defaultTheme='dark'
+              enableSystem={true}
+              storageKey='zalo-theme'
+            >
+                <main className="h-full">
+                  <div className="hidden md:flex h-full w-72px fixed inset-y-0">
+                    <NavigationSidebar />
+                    {children}
+                  </div>  
+                </main>
+            </ThemeProvider>
+          </body>
       </ClerkProvider>
     </html>
   );

@@ -13,11 +13,14 @@ export const NavigationItem = ({
         <div>
             <button className="flex">
                 <div className="
+                dark:text-black
                 justify-center 
                 items-center 
                 flex
                 rounded-[24px]
-                h-[48px] w-[48px] bg-white hover:rounded-[16px] transition-all">
+                h-[48px] w-[48px] 
+                bg-white 
+                hover:rounded-[16px] transition-all">
                     {icon}
                 </div>
             </button>
