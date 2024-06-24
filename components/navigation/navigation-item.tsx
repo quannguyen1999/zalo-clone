@@ -1,6 +1,9 @@
+'use client'
 import { MessageCircle } from "lucide-react"
 import { Contact } from 'lucide-react';
 import { Check } from 'lucide-react';
+import { useRouter } from "next/navigation";
+import {useEffect} from 'react';
 interface NavigationItemProps {
     id: number;
     icon: React.ReactNode;
@@ -11,10 +14,15 @@ export const NavigationItem = ({
     icon,
     url
 }: NavigationItemProps) => {
-
+    const router = useRouter();
+    
+    const navigatePage = () => {
+        router.push(url);
+    }
+ 
     return (
         <div>
-            <button className="flex">
+            <button className="flex" onClick={navigatePage}>
                 <div className="
                 dark:text-black
                 justify-center 
