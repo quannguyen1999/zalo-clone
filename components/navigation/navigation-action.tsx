@@ -4,7 +4,7 @@ export const NagigationAction = () => {
     return (
         <div className="">
             <button className="flex">
-                <div className="h-[48px] w-[48px] 
+                <div className="h-[38px] w-[38px] 
                 overflow-hidden 
                 justify-center 
                 items-center 
@@ -15,8 +15,8 @@ export const NagigationAction = () => {
                 hover:rounded-[16px]
                 transition-all
                 dark:text-black
-                ">
-                    <Plus />
+                " >
+                    <Plus size={18}/>
                 </div>
                 
             </button>

@@ -29,7 +29,7 @@ export default function RootLayout({
               storageKey='zalo-theme'
             >
                 <main className="h-full">
-                  <div className="hidden md:flex h-full w-72px fixed inset-y-0">
+                  <div className="hidden md:flex h-full w-[58px] fixed inset-y-0">
                     <NavigationSidebar />
                     {children}
                   </div>  

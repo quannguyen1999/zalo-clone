@@ -8,12 +8,11 @@ import { Settings } from "lucide-react";
 import { ModeToggle } from "../mode-toggle";
 
 const menuIconMapTop = [
-  { id: 1, icon: <MessageCircle /> },
-  { id: 2, icon: <Contact /> },
-  { id: 3, icon: <Check /> },
+  { id: 1, icon: <MessageCircle size={18}/>, url: "/chat" },
+  { id: 2, icon: <Contact size={18}/>, url: "/contact" },
 ];
 
-const menuIconMapBottom = [{ id: 1, icon: <Settings /> }];
+const menuIconMapBottom = [{ id: 1, icon: <Settings size={18}/> }];
 
 export const NavigationSidebar = () => {
   return (
@@ -21,14 +20,19 @@ export const NavigationSidebar = () => {
       <UserButton
         appearance={{
           elements: {
-            avatarBox: "h-[48px] w-[48px]",
+            avatarBox: "h-[38px] w-[38px]",
           },
-        }}
+        }} 
       />
-      <NagigationAction />
+      {/* <NagigationAction /> */}
       <div className="flex-1 flex flex-col gap-3">
         {menuIconMapTop.map((menu) => (
-          <NavigationItem key={menu.id} icon={menu.icon} id={menu.id} />
+          <NavigationItem 
+            key={menu.id} 
+            icon={menu.icon} 
+            id={menu.id} 
+            url={menu.url}
+            />
         ))}
       </div>
 

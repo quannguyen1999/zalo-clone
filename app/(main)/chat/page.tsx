@@ -8,7 +8,7 @@ export const Chat = ({
     return (
         <>
             <div className="">
-           xx
+                xx
             </div>
         </>
     )

@@ -1,7 +1,8 @@
 import { ChatSidebar } from "@/components/chat/chat-sidebar"
+import ContactSidebar from "@/components/contact/contact-sidebar";
 import { Main } from "next/document";
 
-export const ChatLayout = ({
+export const ContactLayout = ({
     childrens
 }: {
     childrens: React.ReactNode
@@ -9,12 +10,12 @@ export const ChatLayout = ({
     return (
         <>
             <div className="">
-                <ChatSidebar/>
-                dfs
+                <ContactSidebar />
+                contact layotu
                 {childrens}
             </div>
         </>
     )
 }
 
-export default ChatLayout;
+export default ContactLayout;
