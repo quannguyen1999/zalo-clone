@@ -16,7 +16,9 @@ const menuIconMapBottom = [{ id: 1, icon: <Settings size={18}/> }];
 
 export const NavigationSidebar = () => {
   return (
-    <div className="w-full h-full bg-blue-500 dark:bg-gray-600 flex flex-col gap-2 p-2">
+    <div className="w-full h-full bg-blue-500 
+        dark:bg-gray-600 flex 
+        flex-col gap-2 p-2">
       <UserButton
         appearance={{
           elements: {

@@ -5,6 +5,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from '@/components/provider/theme-provider';
 import { NavigationSidebar } from '@/components/navigation/navigation-sidebar';
+import { ModalProvider } from '@/components/provider/modal-provider';
 const font = Open_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -28,6 +29,7 @@ export default function RootLayout({
               enableSystem={true}
               storageKey='zalo-theme'
             >
+                <ModalProvider />
                 <main className="h-full">
                   <div className="hidden md:flex h-full w-[58px] fixed inset-y-0">
                     <NavigationSidebar />
