@@ -4,6 +4,8 @@ export const ChatItem = () => {
   return (
     <div className="flex flex-row w-full h-[70px] cursor-pointer
         hover:bg-gray-100
+      transition-all
+        group
     ">
       <div className="p-2 ">
         <div
@@ -23,13 +25,16 @@ export const ChatItem = () => {
       </div>
       <div className="flex-1 flex flex-col mt-2">
         <div>
-          <p className="font-bold text-sm text-gray-600">NickName</p>
+          <p className="text-sm text-gray-600
+            dark:text-white 
+            dark:group-hover:text-black
+          ">NickName</p>
         </div>
         <div>
           <p className="text-sm text-gray-400">Message</p>
         </div>
       </div>
-      <div className="p-2 text-xs">
+      <div className="p-2 text-xs dark:group-hover:text-black">
         <p>1 hour</p>
       </div>
     </div>

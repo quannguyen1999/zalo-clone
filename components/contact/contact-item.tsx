@@ -8,7 +8,7 @@ export const ContactItem = ({
     value
 }: ContactItemProps) => {
     return (
-        <div className="flex flex-row p-4 gap-4 cursor-pointer">
+        <div className="flex flex-row p-4 gap-4 cursor-pointer hover:bg-gray-300">
             <div>
                 {icon}
             </div>

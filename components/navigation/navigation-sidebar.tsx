@@ -42,7 +42,12 @@ export const NavigationSidebar = () => {
 
       <div className="flex flex-col gap-3">
         {menuIconMapBottom.map((menu) => (
-          <NavigationItem key={menu.id} icon={menu.icon} id={menu.id} />
+          <NavigationItem 
+            key={menu.id} 
+            icon={menu.icon} 
+            id={menu.id} 
+            url=""
+            />
         ))}
       </div>
     </div>

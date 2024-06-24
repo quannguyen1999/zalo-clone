@@ -10,7 +10,6 @@ export const ChatLayout = ({
         <>
             <div className="">
                 <ChatSidebar/>
-                dfs
                 {childrens}
             </div>
         </>
