@@ -3,7 +3,7 @@ import MessageMain from "@/components/message/message-main";
 
 export const ConversationId = () => {
     return (
-        <div className=" bg-red-500 h-full w-full">
+        <div className=" h-full w-full">
             <MessageMain />
         </div>
     )

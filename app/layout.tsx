@@ -33,8 +33,10 @@ export default function RootLayout({
                 <main className="h-full">
                   <div className="hidden md:flex h-full w-[58px] fixed inset-y-0">
                     <NavigationSidebar />
-                    {children}
                   </div>  
+                  <div className='md:pl-[55px] h-full'>
+                    {children}
+                  </div>
                 </main>
             </ThemeProvider>
           </body>
