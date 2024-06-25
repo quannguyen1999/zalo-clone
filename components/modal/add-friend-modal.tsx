@@ -22,9 +22,13 @@ import {
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { ChatItem } from "../chat/chat-item";
+import { useState } from "react";
 
 export const AddFriendModal = () => {
-  const data = [1,2,3,4,5];
+
+  const [search, setSearch] = useState("");
+
+  const data = [1,2,3,4,5,6,7,8];
 
   const { isOpen, onClose, type } = useModal();
   
@@ -32,6 +36,12 @@ export const AddFriendModal = () => {
 
   const handleClose = () => {
     onClose();
+  };
+
+  const handleKeyDown = (e: any) => {
+    if (e.code === "Enter") {
+      console.log(search)
+    }
   };
 
   return (
@@ -43,12 +53,19 @@ export const AddFriendModal = () => {
             Thêm Bạn
           </DialogTitle>
           <Input type="search" placeholder="Search contact..." 
-                className="focus-visible:ring-0 h-[35px]"/>
-          <div className="flex-1 flex flex-col w-full">
-            {data.map((value) => (
-                <ChatItem key={value} type="addFriend"/>
-            ))}
+                className="focus-visible:ring-0 h-[35px] 
+                           focus-visible:ring-offset-0"
+                onChange={(e) => setSearch(e.target.value)}
+                onKeyDown={handleKeyDown}
+          />
+          <div className="h-60">
+            <div className="flex-1 flex flex-col w-full h-full overflow-auto">
+              {data.map((value) => (
+                  <ChatItem key={value} type="addFriend"/>
+              ))}
+            </div>
           </div>
+          
         </DialogHeader>
         <DialogFooter className="bg-gray-100 px-6 py-4">
           <Button type="submit" className="bg-gray-400">

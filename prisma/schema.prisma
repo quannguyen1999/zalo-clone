@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Profile {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @unique 
+  name String 
+  imageUrl String 
+  email String 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Conversation {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  profileOneId String 
+  profileTwoId String 
+}
+
+model DirectMessage {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  content String 
+  fileUrl String?
+  profileId String 
+  conversationId String 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  deleted Boolean @default(false)
+}
