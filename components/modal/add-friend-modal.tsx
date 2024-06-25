@@ -1,5 +1,5 @@
 'use client'
-
+import {db} from '@/lib/db';
 import { useModal } from "@/hook/user-modal-store";
 import { useRouter } from "next/navigation";
 import {
@@ -40,7 +40,15 @@ export const AddFriendModal = () => {
 
   const handleKeyDown = (e: any) => {
     if (e.code === "Enter") {
-      console.log(search)
+      const profiles = db.profile.findMany({
+        where: {
+          email:{
+            contains: e,
+            mode: "insensitive",
+          } 
+        }
+      })
+      console.log(profiles);
     }
   };
 
