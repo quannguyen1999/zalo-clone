@@ -1,10 +1,16 @@
 import Image from "next/image";
-
-export const ChatItem = () => {
+import { Button } from "../ui/button";
+interface ChatItemProps {
+  type: 'addFriend' | 'listFriend';
+}
+export const ChatItem = ({
+  type
+}: ChatItemProps) => {
   return (
-    <div className="flex flex-row w-full h-[70px] cursor-pointer
+    <div className="flex flex-row w-full 
+        h-[70px] cursor-pointer
         hover:bg-gray-100
-      transition-all
+        transition-all
         group
     ">
       <div className="p-2 ">
@@ -35,7 +41,17 @@ export const ChatItem = () => {
         </div>
       </div>
       <div className="p-2 text-xs dark:group-hover:text-black">
-        <p>1 hour</p>
+        {type == 'addFriend' ? 
+          <Button className=" text-blue-500 
+          border 
+          bg-secondary
+          h-22 w-22 border-1 border-black
+          hover:bg-blue-200
+            ">
+            Kết bạn
+          </Button> : 
+          <p>1 hour</p>}
+        
       </div>
     </div>
   );

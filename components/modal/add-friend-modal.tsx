@@ -20,8 +20,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import { ChatItem } from "../chat/chat-item";
 
 export const AddFriendModal = () => {
+  const data = [1,2,3,4,5];
+
   const { isOpen, onClose, type } = useModal();
   
   const isModalOpen = isOpen && type === "addFriend";
@@ -31,19 +35,27 @@ export const AddFriendModal = () => {
   };
 
   return (
-    <Dialog open={isModalOpen} onOpenChange={handleClose}>
-      <DialogContent className="bg-white text-black p-0 overflow-hidden">
-        <DialogHeader className="pt-8 px-6">
-          <DialogTitle className="text-2xl text-center font-bold">
-            Add friend
+    <Dialog open={isModalOpen} onOpenChange={handleClose} >
+      <DialogContent className="bg-white text-black 
+      p-0 overflow-hidden w-[400px] transition-all">
+        <DialogHeader className="pt-5 px-6">
+          <DialogTitle className="text-base text-center">
+            Thêm Bạn
           </DialogTitle>
-          <DialogDescription className="text-center text-zinc-500">
-            find a bitch
-          </DialogDescription>
+          <Input type="search" placeholder="Search contact..." 
+                className="focus-visible:ring-0 h-[35px]"/>
+          <div className="flex-1 flex flex-col w-full">
+            {data.map((value) => (
+                <ChatItem key={value} type="addFriend"/>
+            ))}
+          </div>
         </DialogHeader>
         <DialogFooter className="bg-gray-100 px-6 py-4">
-          <Button type="submit">
-            Create
+          <Button type="submit" className="bg-gray-400">
+            Hủy
+          </Button>
+          <Button type="submit" className="bg-blue-600">
+            Tìm Kiếm
           </Button>
         </DialogFooter>
       </DialogContent>

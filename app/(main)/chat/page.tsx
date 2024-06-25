@@ -1,17 +1,11 @@
-import { ChatSidebar } from "@/components/chat/chat-sidebar"
 
-export const Chat = ({
-    childrens
-}: {
-    childrens: React.ReactNode
-}) => {
+export const ChatPage = () => {
     return (
-        <>
-            <div className="">
-                xx
-            </div>
-        </>
+        <div className="bg-red-500">
+            asdsdf
+        </div>
     )
 }
 
-export default Chat;
+
+export default ChatPage;

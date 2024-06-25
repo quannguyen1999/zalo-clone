@@ -11,7 +11,6 @@ export const ContactLayout = ({
         <>
             <div className="">
                 <ContactSidebar />
-                contact layotu
                 {childrens}
             </div>
         </>

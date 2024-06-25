@@ -5,7 +5,7 @@ export const ChatBody = () => {
     return (
         <div className="h-full overflow-auto">
             {data.map((value) => (
-                <ChatItem key={value}/>
+                <ChatItem key={value} type="listFriend"/>
             
             ))}
         </div>
