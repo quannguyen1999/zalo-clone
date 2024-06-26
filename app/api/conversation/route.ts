@@ -19,9 +19,6 @@ export async function GET(
             }
         })
 
-        console.log("1")
-        console.log(listConversation)
-
         const conversation = await db.conversation.findMany({
             where: {
                 AND: [
@@ -39,9 +36,6 @@ export async function GET(
             }
         })
 
-        console.log("2")
-        console.log(conversation)
-
         const profiles = await db.profile.findMany({
             where: {
                 id: {
@@ -49,12 +43,9 @@ export async function GET(
                 }
             }
         })
-
-        console.log("3")
-        console.log(profiles)
         
         return NextResponse.json({
-            profiles
+            items: profiles
         })
 
     }catch(error) {

@@ -11,18 +11,18 @@ interface ProfileProps {
     status: string;
     friendRequestId: string;
   }
-export const ChatBody = async () => {
-    let friends: ProfileProps[] = [];
+export const ChatBody = () => {
+    const [friends, setFriends] = useState([]);
     useEffect(() => {    
         const fetchFriends = async () => {
             try {
               const response = await axios.get('/api/conversation');
-              friends = response.data;
+              console.log(response.data)
+              setFriends(response.data.items);
             } catch (error) {
               console.error('Error fetching friends:', error);
             }
           };
-      
           fetchFriends();
     }, [])
     
