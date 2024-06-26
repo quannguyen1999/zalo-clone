@@ -18,13 +18,6 @@ export const ChatHeader = () => {
                  cursor-pointer rounded-[40px] justify-center" onClick={() => onOpen("addFriend")}>
                 <UserPlus size={17}/>
             </div>
-            {/* <div className="bg-white hover:bg-blue-500 
-               text-gray-700 hover:text-white transition-all
-                dark:text-black p-2 w-[30px] h-[30px] 
-                dark:hover:bg-gray-700 dark:hover:text-white
-                cursor-pointer rounded-[40px] focus-visible:ring-0">
-                <UserPlus size={17}/>
-            </div> */}
         </div>
     )
 }
