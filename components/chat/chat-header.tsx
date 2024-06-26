@@ -5,12 +5,10 @@ import { UserPlus } from 'lucide-react';
 
 export const ChatHeader = () => {
     const {onOpen} = useModal();
-
-
     return (
         <div className="flex flex-row bg-white dark:bg-gray-500 w-full p-2 gap-1">
             <Input type="search" placeholder="Search contact..." 
-                className="focus-visible:ring-0 h-[35px]"/>
+                className="focus-visible:ring-0 h-[35px] focus-visible:ring-offset-0"/>
             <div className="bg-white hover:bg-blue-500 
                  text-gray-700 hover:text-white transition-all
                  dark:text-black p-2 w-[30px] h-[30px] 

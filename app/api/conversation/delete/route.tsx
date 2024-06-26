@@ -14,24 +14,20 @@ export async function GET(
 
         const {searchParams} = new URL(req.url);
 
-        const profileIdRequest = searchParams.get("profileIdRequest");
+        const friendRequestId = searchParams.get("friendRequestId");
 
-        if(!profileIdRequest){
+        if(!friendRequestId){
             return new NextResponse("Bad Request", {status:400})
         }
 
-        const newFriendRequest = await db.friendRequest.create({
-            data: {
-                senderId: profile.id,
-                receiverId: profileIdRequest,
-                status: 'pending',
+        await db.friendRequest.delete({
+            where: {
+                id: friendRequestId
             }
         })
-
-      
-
+       
         return NextResponse.json({
-            newFriendRequest
+            status: 'success'
         })
 
     }catch(error) {

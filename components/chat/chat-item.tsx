@@ -15,6 +15,7 @@ interface ChatItemProps {
     | string
     | "https://utfs.io/f/30bf0d54-3fa7-42ae-9f7f-e28b5acf0b96-1x9cqv.jpeg";
   status?: string;
+  friendRequestId?: string;
 }
 export const ChatItem = ({
   id,
@@ -23,12 +24,13 @@ export const ChatItem = ({
   email,
   imageUrl,
   status,
+  friendRequestId
 }: ChatItemProps) => {
   const [currentStatus, setCurrentStatus] = useState(status);
 
   const addFriend = async () => {
     const url = qs.stringifyUrl({
-      url: "/api/direct-message",
+      url: "/api/conversation/add",
       query: {
         profileIdRequest: id,
       },
@@ -38,9 +40,29 @@ export const ChatItem = ({
     setCurrentStatus("pending");
   };
 
-  const cancelFriend = async () => {};
+  const cancelFriend = async () => {
+    const url = qs.stringifyUrl({
+      url: "/api/conversation/delete",
+      query: {
+        friendRequestId: friendRequestId,
+      },
+    });
 
-  const acceptFriend = async () => {};
+    await axios.get(url);
+    setCurrentStatus("");
+  };
+
+  const acceptFriend = async () => {
+    const url = qs.stringifyUrl({
+      url: "/api/conversation/accept",
+      query: {
+        friendRequestId: friendRequestId,
+      },
+    });
+
+    await axios.get(url);
+    setCurrentStatus("accepted");
+  };
 
   return (
     <div
@@ -116,10 +138,11 @@ export const ChatItem = ({
 
             {currentStatus === "accepted" && (
               <Button
-                className=" text-blue-500 
+                className=" text-white 
             border 
             bg-green-400
-            h-22 w-22 border-1 border-black
+            text-[10px]
+            h-8 w-14 border-1 border-black
             hover:bg-green-600
               "
                 disabled

@@ -34,6 +34,7 @@ interface ProfileProps {
   imageUrl: string;
   email: string;
   status: string;
+  friendRequestId: string;
 }
 
 export const AddFriendModal = () => {
@@ -114,6 +115,7 @@ export const AddFriendModal = () => {
                         email={value.email}
                         id={value.id}
                         status={value.status}
+                        friendRequestId={value.friendRequestId}
                       />
                     ))}
                   </div>

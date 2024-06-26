@@ -11,6 +11,7 @@ interface ProfileProps {
     imageUrl: string;
     email: string;
     status: string;
+    friendRequestId: string;
 }
   
 
@@ -74,17 +75,20 @@ export async function GET(
                 imageUrl: value.imageUrl,
                 email: value.email,
                 status: '',
+                friendRequestId: ''
             }
             
             const sentRequestProfile = listSentRequestFriend.filter(t => t.receiverId === value.id);
             if(sentRequestProfile.length > 0){
                 profileProps.status = sentRequestProfile[0].status;
+                profileProps.friendRequestId = sentRequestProfile[0].id;
             }
  
             const receivedProfile = listReceivedFriend.filter(t => t.senderId === value.id);
 
             if(receivedProfile.length > 0){
-                    profileProps.status = 'receivedRequest';
+                profileProps.status = 'receivedRequest';
+                profileProps.friendRequestId = receivedProfile[0].id;
             }
 
             listReturnResultProfile.push(profileProps);
