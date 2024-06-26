@@ -15,21 +15,37 @@ model Profile {
   email String 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  directMessages DirectMessage[]
+  conversations Conversation[] 
+  sentRequests    FriendRequest[] @relation("SenderRequests")
+  receivedRequests FriendRequest[] @relation("ReceiverRequests")
 }
 
 model Conversation {
   id String @id @default(auto()) @map("_id") @db.ObjectId
-  profileOneId String 
-  profileTwoId String 
+  roomId String
+  profileId String @db.ObjectId
+  profile Profile @relation(fields: [profileId], references: [id])
 }
 
 model DirectMessage {
   id String @id @default(auto()) @map("_id") @db.ObjectId
+  roomId String
   content String 
   fileUrl String?
-  profileId String 
-  conversationId String 
+  profileId String @db.ObjectId
+  profile Profile @relation(fields: [profileId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   deleted Boolean @default(false)
+}
+
+model FriendRequest {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  senderId   String   @db.ObjectId
+  receiverId String   @db.ObjectId
+  status     String   @default("pending") // "pending", "accepted", "rejected"
+  createdAt  DateTime @default(now())
+  sender     Profile     @relation("SenderRequests", fields: [senderId], references: [id])
+  receiver   Profile     @relation("ReceiverRequests", fields: [receiverId], references: [id])
 }

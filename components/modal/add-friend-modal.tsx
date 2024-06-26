@@ -1,4 +1,6 @@
 'use client'
+import axios from 'axios';
+import qs from 'query-string';
 import {db} from '@/lib/db';
 import { useModal } from "@/hook/user-modal-store";
 import { useRouter } from "next/navigation";
@@ -24,11 +26,20 @@ import { Input } from "../ui/input";
 import { ChatItem } from "../chat/chat-item";
 import { useState } from "react";
 
+
+interface ProfileProps {
+  id: string 
+  userId: string
+  name: string 
+  imageUrl: string 
+  email: string 
+}
+
 export const AddFriendModal = () => {
 
-  const [search, setSearch] = useState("");
+  const [emailSearch, setEmailSearch] = useState("");
 
-  const data = [1,2,3,4,5,6,7,8];
+  const [contacts, setContacts] = useState([]);
 
   const { isOpen, onClose, type } = useModal();
   
@@ -38,17 +49,18 @@ export const AddFriendModal = () => {
     onClose();
   };
 
-  const handleKeyDown = (e: any) => {
+  const handleKeyDown = async (e: any) => {
     if (e.code === "Enter") {
-      const profiles = db.profile.findMany({
-        where: {
-          email:{
-            contains: e,
-            mode: "insensitive",
-          } 
+      const url = qs.stringifyUrl({
+          url: '/api/profile',
+          query: {
+            emailProfile: emailSearch
         }
       })
-      console.log(profiles);
+      
+      const result = await axios.get(url);
+
+      setContacts(result.data?.items);
     }
   };
 
@@ -63,13 +75,17 @@ export const AddFriendModal = () => {
           <Input type="search" placeholder="Search contact..." 
                 className="focus-visible:ring-0 h-[35px] 
                            focus-visible:ring-offset-0"
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={(e) => setEmailSearch(e.target.value)}
                 onKeyDown={handleKeyDown}
           />
           <div className="h-60">
             <div className="flex-1 flex flex-col w-full h-full overflow-auto">
-              {data.map((value) => (
-                  <ChatItem key={value} type="addFriend"/>
+              {contacts.map((value: ProfileProps) => (
+                  <ChatItem key={value.id} type="addFriend" 
+                      nameProfile={value.name} 
+                      imageUrl={value.imageUrl}
+                      email={value.email}
+                      />
               ))}
             </div>
           </div>
