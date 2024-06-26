@@ -6,6 +6,7 @@ import qs from "query-string";
 import { db } from "@/lib/db";
 import { currentProfile } from "@/lib/current-profile";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 interface ChatItemProps {
   id: string;
   type: "addFriend" | "listFriend";
@@ -16,6 +17,7 @@ interface ChatItemProps {
     | "https://utfs.io/f/30bf0d54-3fa7-42ae-9f7f-e28b5acf0b96-1x9cqv.jpeg";
   status?: string;
   friendRequestId?: string;
+  conversationId?: string;
 }
 export const ChatItem = ({
   id,
@@ -24,8 +26,11 @@ export const ChatItem = ({
   email,
   imageUrl,
   status,
-  friendRequestId
+  friendRequestId,
+  conversationId
 }: ChatItemProps) => {
+  const router = useRouter();
+
   const [currentStatus, setCurrentStatus] = useState(status);
 
   const addFriend = async () => {
@@ -64,6 +69,13 @@ export const ChatItem = ({
     setCurrentStatus("accepted");
   };
 
+  const redirectToChat = () => {
+    if(type != 'listFriend'){
+      return;
+    }
+    router.push(`/chat/conversation/${conversationId}`);
+  }
+
   return (
     <div
       className="flex flex-row w-full 
@@ -72,6 +84,7 @@ export const ChatItem = ({
         transition-all
         group
     "
+    onClick={redirectToChat}
     >
       <div className="p-2 ">
         <div
