@@ -2,6 +2,9 @@ import { NextResponse } from "next/server";
 import {db} from '@/lib/db';
 import { currentProfile } from "@/lib/current-profile";
 import {v4 as uuidv4} from 'uuid'; 
+import { DirectMessage } from "@prisma/client";
+
+const MESSAGE_BATCH = 10;
 export async function GET(
     req: Request
 ) {
@@ -14,24 +17,38 @@ export async function GET(
 
         const {searchParams} = new URL(req.url);
 
-        const profileIdRequest = searchParams.get("profileIdRequest");
+        const cursor = searchParams.get("cursor");
 
-        if(!profileIdRequest){
-            return new NextResponse("Bad Request", {status:400})
+        let messages: DirectMessage[] = [];
+        if(cursor){
+            messages = await db.directMessage.findMany({
+                take: MESSAGE_BATCH,
+                skip: 1,
+                cursor: {
+                    id: cursor
+                },
+                orderBy: {
+                    createdAt: 'desc'
+                }
+            })
+        }else{
+            messages = await db.directMessage.findMany({
+                take: MESSAGE_BATCH,
+                orderBy: {
+                    createdAt: "desc"
+                }
+            })
         }
 
-        const newFriendRequest = await db.friendRequest.create({
-            data: {
-                senderId: profile.id,
-                receiverId: profileIdRequest,
-                status: 'pending',
-            }
-        })
+        let nextCursor = null;
 
-      
+        if(messages.length === MESSAGE_BATCH) {
+            nextCursor = messages[MESSAGE_BATCH - 1].id;
+        }
 
         return NextResponse.json({
-            newFriendRequest
+            items: messages,
+            nextCursor
         })
 
     }catch(error) {

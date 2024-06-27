@@ -7,6 +7,7 @@ import { db } from "@/lib/db";
 import { currentProfile } from "@/lib/current-profile";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { currentUser, getAuth } from "@clerk/nextjs/server";
 interface ChatItemProps {
   id: string;
   type: "addFriend" | "listFriend";
@@ -69,11 +70,11 @@ export const ChatItem = ({
     setCurrentStatus("accepted");
   };
 
-  const redirectToChat = () => {
+  const redirectToChat = async () => {
     if(type != 'listFriend'){
       return;
     }
-    router.push(`/chat/conversation/${conversationId}`);
+    router.push(`/chat/conversation/${conversationId}/profile/${id}`);
   }
 
   return (

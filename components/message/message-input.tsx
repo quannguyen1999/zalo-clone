@@ -3,12 +3,21 @@ import { Heart, Video } from "lucide-react";
 import { Input } from "../ui/input";
 import { EmojiPicker } from "../emoji-picker";
 import { useState } from "react";
-
-export const MessageInput = () => {
+import axios from "axios";
+interface ConversationProps {
+    conversationId: string;
+}
+export const MessageInput = ({
+    conversationId
+}: ConversationProps) => {
     const [message, setMessage] = useState("");
     const handleKeyDown = async (e: any) => { 
         if (e.code === "Enter") {
-            console.log(message);
+            const data = {
+                roomId: conversationId,
+                content: message,
+            }
+            await axios.post("/api/direct-message/send",data);
             setMessage("");
         }
     };
@@ -36,12 +45,12 @@ export const MessageInput = () => {
                 <div className="absolute 
                     text-center justify-center
                     top-4 right-12 cursor-pointer text-gray-600">
-                    <EmojiPicker onChange={(emoji: string) => {}}/>
+                    <EmojiPicker onChange={(emoji: string) => {setMessage(message + ' ' + emoji)}}/>
                 </div>
                 <div className="absolute 
                     text-center justify-center
                     top-4 right-4 cursor-pointer  text-gray-600">
-                    <Heart className="cursor-pointer" size={20}/>
+                    <Heart className="cursor-pointer hover:text-red-600" size={20}/>
                 </div>
             </div>
             

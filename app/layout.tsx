@@ -1,11 +1,19 @@
-import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Inter, Open_Sans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { ThemeProvider } from '@/components/provider/theme-provider';
-import { NavigationSidebar } from '@/components/navigation/navigation-sidebar';
-import { ModalProvider } from '@/components/provider/modal-provider';
+import { ThemeProvider } from "@/components/provider/theme-provider";
+import { NavigationSidebar } from "@/components/navigation/navigation-sidebar";
+import { ModalProvider } from "@/components/provider/modal-provider";
+import { QueryProvider } from "@/components/provider/query-provider";
+import { SocketProvider } from "@/components/provider/socket-provider";
 const font = Open_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -21,25 +29,26 @@ export default function RootLayout({
   return (
     <html lang="en" suppressContentEditableWarning>
       <ClerkProvider>
-        <body className={cn(font.className,
-          "bg-white dark:bg-[#313338]"
-          )}>
-            <ThemeProvider attribute='class'
-              defaultTheme='dark'
-              enableSystem={true}
-              storageKey='zalo-theme'
-            >
-                <ModalProvider />
-                <main className="h-full">
-                  <div className="hidden md:flex h-full w-[58px] fixed inset-y-0">
-                    <NavigationSidebar />
-                  </div>  
-                  <div className='md:pl-[55px] h-full'>
-                    {children}
-                  </div>
-                </main>
-            </ThemeProvider>
-          </body>
+        <body className={cn(font.className, "bg-white dark:bg-[#313338]")}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem={true}
+            storageKey="zalo-theme"
+          >
+            <ModalProvider />
+            <main className="h-full">
+              <div className="hidden md:flex h-full w-[58px] fixed inset-y-0">
+                <NavigationSidebar />
+              </div>
+              <div className="md:pl-[55px] h-full">
+                <SocketProvider>
+                  <QueryProvider>{children}</QueryProvider>
+                </SocketProvider>
+              </div>
+            </main>
+          </ThemeProvider>
+        </body>
       </ClerkProvider>
     </html>
   );
