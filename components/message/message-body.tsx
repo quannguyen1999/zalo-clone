@@ -2,6 +2,7 @@ import { useChatQuery } from "@/hook/use-chat-query";
 import MessageItem from "./message-item";
 import { Loader2 } from "lucide-react";
 import { Fragment, useRef, ElementRef } from "react";
+import { useChatSocket } from "@/hook/use-chat-socket";
 interface ConversationProps {
   conversationId: string;
   profileId: string;
@@ -21,6 +22,9 @@ export const MessageBody = ({
   profileId,
 }: ConversationProps) => {
   const queryKey = `conversation:${conversationId}`;
+  const addKey = `conversation:${conversationId}:messages`;
+const updateKey = `conversation:${conversationId}:messages:update`
+
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
     useChatQuery({
       queryKey,
@@ -29,14 +33,14 @@ export const MessageBody = ({
       paramValue: conversationId,
     });
 
-  // useChatSocket({queryKey, addKey, updateKey});
+  useChatSocket({queryKey, addKey, updateKey});
+  
   // useChatScroll({
   //     chatRef,
   //     bottomRef,
   //     loadMore: fetchNextPage,
   //     shouldLoadMore: !isFetchingNextPage && !!hasNextPage,
   //     count: data?.pages?.[0]?.items?.length ?? 0,
-
   // })
 
   if (status === "pending") {
@@ -49,8 +53,6 @@ export const MessageBody = ({
       </div>
     );
   }
-
-  console.log(status)
 
   return (
     <div className="flex-1 flex flex-col-reverse overflow-x-auto">

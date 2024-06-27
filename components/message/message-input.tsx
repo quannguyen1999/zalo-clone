@@ -17,7 +17,7 @@ export const MessageInput = ({
                 roomId: conversationId,
                 content: message,
             }
-            await axios.post("/api/direct-message/send",data);
+            await axios.post("/api/socket/direct-messages",data);
             setMessage("");
         }
     };
@@ -59,3 +59,4 @@ export const MessageInput = ({
 }
 
 export default MessageInput;
+// export const runtime = 'edge';
