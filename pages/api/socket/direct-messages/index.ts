@@ -1,3 +1,4 @@
+
 import { NextApiResponseServerIo } from "@/type";
 import { NextApiRequest } from "next";
 import { NextResponse } from "next/server";
@@ -14,14 +15,12 @@ export default async function handler(
     try{
         const profile = await currentProfilePage(req);
         const {content, roomId} = req.body;
-        const {conversationId} = req.query;
 
         if(!profile){
-            return new NextResponse("Unauthorized", {status: 401});
-        }
-
-        if(!conversationId){
-            return new NextResponse("conversation id is missing" , {status : 400})
+            // return new NextResponse("Unauthorized", {status: 401});
+            return res.status(401).json({
+                message: 'Unauthorized'
+            });
         }
 
         if(!content){
@@ -29,7 +28,7 @@ export default async function handler(
        
         }
 
-        await db.directMessage.create({
+        let directMessage = await db.directMessage.create({
             data: {
                 roomId: roomId,
                 content: content,
@@ -38,12 +37,13 @@ export default async function handler(
             }
         })
 
-        const conversationKey = `conversation:${conversationId}:messages`;
+        const conversationKey = `conversation:${roomId}:messages`;
 
-        res?.socket?.server?.io?.emit(conversationKey, content);
+        res?.socket?.server?.io?.emit(conversationKey, directMessage);
 
-        // return res.status(200).json(content);
-
+        return res.status(200).json({
+            content: content
+        });
     } catch (error){
         console.log("[DIRECT_MESSAGES_POST]", error);
         return res.status(500).json({message: "Internal server errror"});
