@@ -34,6 +34,7 @@ export const useChatSocket = ({
         }
 
         socket.on(updateKey, (message: DirectMessage) => {
+          
             queryClient.setQueryData([queryKey], (oldData: any) => {
                 if(!oldData || !oldData.pages || oldData.pages.length === 0){
                     return oldData;
@@ -49,8 +50,6 @@ export const useChatSocket = ({
                             return item;
                         })
                     };
-
-                   
                 });
 
                 return {
@@ -61,6 +60,7 @@ export const useChatSocket = ({
         })
 
         socket.on(addKey, (message: DirectMessage) => {
+           
             queryClient.setQueryData([queryKey], (oldData: any) => {
                 if(!oldData || !oldData.pages || oldData.pages.length === 0){
                     return {

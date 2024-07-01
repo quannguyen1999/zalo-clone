@@ -23,15 +23,14 @@ export const MessageBody = ({
 }: ConversationProps) => {
   const queryKey = `conversation:${conversationId}`;
   const addKey = `conversation:${conversationId}:messages`;
-const updateKey = `conversation:${conversationId}:messages:update`
+  const updateKey = `conversation:${conversationId}:messages:update`
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
-    useChatQuery({
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =  useChatQuery({
       queryKey,
       apiUrl: "/api/direct-message",
       paramKey: "conversationId",
       paramValue: conversationId,
-    });
+  });
 
   useChatSocket({queryKey, addKey, updateKey});
   

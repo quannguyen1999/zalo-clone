@@ -30,8 +30,10 @@ export const NavigationItem = ({
                 flex
                 rounded-[24px]
                 h-[38px] w-[38px] 
-                bg-white 
-                hover:rounded-[16px] transition-all">
+                bg-blue-500 
+                hover:rounded-[16px] transition-all
+                border border-white
+                ">
                     {icon}
                 </div>
             </button>

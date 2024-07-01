@@ -8,11 +8,11 @@ import { Settings } from "lucide-react";
 import { ModeToggle } from "../mode-toggle";
 
 const menuIconMapTop = [
-  { id: 1, icon: <MessageCircle size={18}/>, url: "/chat" },
-  { id: 2, icon: <Contact size={18}/>, url: "/contact" },
+  { id: 1, icon: <MessageCircle size={19} className="text-white"/>, url: "/chat" },
+  { id: 2, icon: <Contact size={19} className="text-white"/>, url: "/contact" },
 ];
 
-const menuIconMapBottom = [{ id: 1, icon: <Settings size={18}/> }];
+const menuIconMapBottom = [{ id: 1, icon: <Settings size={19} className="text-white"/> }];
 
 export const NavigationSidebar = () => {
   return (

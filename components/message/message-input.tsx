@@ -4,6 +4,8 @@ import { Input } from "../ui/input";
 import { EmojiPicker } from "../emoji-picker";
 import { useState } from "react";
 import axios from "axios";
+import queryString from "query-string";
+import { currentProfile } from "@/lib/current-profile";
 interface ConversationProps {
     conversationId: string;
 }
@@ -19,6 +21,9 @@ export const MessageInput = ({
             }
             await axios.post("/api/socket/direct-messages",data);
             setMessage("");
+
+          
+           
         }
     };
 

@@ -1,9 +1,13 @@
-import { initialProfile } from "@/lib/initial-profile"
+import { currentProfile } from "@/lib/current-profile";
+import { initialProfile } from "@/lib/initial-profile";
 import { redirect } from "next/navigation";
 
 export const SetupPage = async () => {
-    await initialProfile();
-    return redirect(`/chat`);
-}
+  await initialProfile();
+
+
+
+  return redirect(`/chat`);
+};
 
 export default SetupPage;

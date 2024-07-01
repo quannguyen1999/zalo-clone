@@ -35,6 +35,7 @@ export const SocketProvider = ({
         })
 
         socketInstance.on("disconnect", () => {
+            console.log("disconnect")
             setIsConnected(false);
         })
 

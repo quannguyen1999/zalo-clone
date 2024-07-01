@@ -4,10 +4,13 @@ import { Button } from "../ui/button";
 import axios from "axios";
 import qs from "query-string";
 import { db } from "@/lib/db";
+
+import { cn } from "@/lib/utils"
 import { currentProfile } from "@/lib/current-profile";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { currentUser, getAuth } from "@clerk/nextjs/server";
+import { useSocket } from "../provider/socket-provider";
 interface ChatItemProps {
   id: string;
   type: "addFriend" | "listFriend";
@@ -30,7 +33,20 @@ export const ChatItem = ({
   friendRequestId,
   conversationId
 }: ChatItemProps) => {
+  const {socket} = useSocket();
   const router = useRouter();
+  const [isOnline, setIsOnline] = useState(false);
+
+  useEffect(()=>{
+    if(type == 'listFriend'){
+      socket.on('profileId:' + id, (status: any ) => {
+        console.log("online")
+        setIsOnline(true);
+      });
+    }
+    
+  }, [])
+
 
   const [currentStatus, setCurrentStatus] = useState(status);
 
@@ -88,16 +104,23 @@ export const ChatItem = ({
     onClick={redirectToChat}
     >
       <div className="p-2 ">
+      <div
+      className="relative"
+    >
+      <div   className="relative 
+        rounded-full 
+        overflow-hidden
+        border 
+        bg-secondary
+        h-12 w-12">
+        <Image src={imageUrl} alt="User Avatar" fill className="object-cover" />
+    
+      </div>
         <div
-          className="relative 
-            rounded-full 
-            overflow-hidden 
-            border 
-            bg-secondary
-            h-12 w-12 border-1 border-black"
-        >
-          <Image src={imageUrl} alt="" fill className="object-cover" />
-        </div>
+        
+        className={cn("absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-white", isOnline ? 'bg-green-500' : 'bg-red-500',)}></div>
+    
+    </div>
       </div>
       <div className="flex-1 flex flex-col mt-2">
         <div>
