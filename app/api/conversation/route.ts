@@ -11,6 +11,7 @@ interface ProfileProps {
     status: string;
     friendRequestId: string;
     conversationId: string;
+    latestMessage: string;
 }
 export async function GET(
     req: Request
@@ -55,7 +56,7 @@ export async function GET(
             }
         })
 
-        profiles.map(profile => {
+        for(let profile of profiles){
             const mapToProfile: ProfileProps = {
                 id: profile.id,
                 userId: profile.id,
@@ -64,10 +65,25 @@ export async function GET(
                 email: profile.email,
                 status: '',
                 friendRequestId: '',
-                conversationId: conversation.filter(t => t.profileId == profile.id)[0].roomId
+                conversationId: conversation.filter(t => t.profileId == profile.id)[0].roomId,
+                latestMessage: ''
             } 
+
+            const latestMessage = await db.directMessage.findFirst({
+                where: {
+                    roomId:  mapToProfile.conversationId,
+                },
+                orderBy: {
+                    createdAt: 'desc'
+                }
+            })
+
+            // console.log(latestMessage)
+
+            mapToProfile.latestMessage = latestMessage?.content || '';
+
             listResult.push(mapToProfile);
-        })
+        }
         
         return NextResponse.json({
             items: listResult

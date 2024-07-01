@@ -25,10 +25,10 @@ export const ChatLayout = ({
    
     return (
         <div className="h-full">
-                <div className="hidden fixed md:flex w-60">
+                <div className="hidden fixed md:flex h-full w-60 z-20 flex-col inset-y-0">
                     <ChatSidebar/>
                 </div>
-                <main className="h-full md:pl-[300px] w-full">
+                <main className="h-full md:pl-60">
                     {children}
                 </main>
         </div> 

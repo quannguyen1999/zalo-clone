@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { currentUser, getAuth } from "@clerk/nextjs/server";
 import { useSocket } from "../provider/socket-provider";
+import { DirectMessage } from "@prisma/client";
 interface ChatItemProps {
   id: string;
   type: "addFriend" | "listFriend";
@@ -22,6 +23,7 @@ interface ChatItemProps {
   status?: string;
   friendRequestId?: string;
   conversationId?: string;
+  latestMessage?: string;
 }
 export const ChatItem = ({
   id,
@@ -31,17 +33,25 @@ export const ChatItem = ({
   imageUrl,
   status,
   friendRequestId,
-  conversationId
+  conversationId,
+  latestMessage
 }: ChatItemProps) => {
   const {socket} = useSocket();
   const router = useRouter();
   const [isOnline, setIsOnline] = useState(false);
 
+  const [latestMessageContent, setLatestMessageContent] = useState(latestMessage);
+
   useEffect(()=>{
+    // const addKey = `conversation:${conversationId}:messages`;
     if(type == 'listFriend'){
       socket.on('profileId:' + id, (status: any ) => {
-        console.log("online")
         setIsOnline(true);
+      });
+
+      socket.on(`conversation:${conversationId}:messages`,  (message: any)  => {
+        console.log("Call")
+        setLatestMessageContent(message.content);
       });
     }
     
@@ -137,7 +147,7 @@ export const ChatItem = ({
           {type === "addFriend" ? (
             <p className="text-[10px] text-gray-400">{email}</p>
           ) : (
-            <p className="text-sm text-gray-400">Message</p>
+            <p className="text-sm text-gray-400">{latestMessageContent || 'Start chat...'}</p>
           )}
         </div>
       </div>

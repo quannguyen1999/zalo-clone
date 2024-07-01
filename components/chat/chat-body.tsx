@@ -11,6 +11,7 @@ interface ProfileProps {
   status: string;
   friendRequestId: string;
   conversationId: string;
+  latestMessage: string;
 }
 export const ChatBody = () => {
   const [friends, setFriends] = useState([]);
@@ -40,6 +41,8 @@ export const ChatBody = () => {
           status={value.status}
           friendRequestId=""
           conversationId={value.conversationId}
+          latestMessage={value.latestMessage}
+
         />
       ))}
     </div>
