@@ -9,10 +9,8 @@ import { ModeToggle } from "../mode-toggle";
 
 const menuIconMapTop = [
   { id: 1, icon: <MessageCircle size={19} className="text-white"/>, url: "/chat" },
-  { id: 2, icon: <Contact size={19} className="text-white"/>, url: "/contact" },
+  { id: 2, icon: <Contact size={19} className="text-white"/>, url: "/contact/list-request" },
 ];
-
-const menuIconMapBottom = [{ id: 1, icon: <Settings size={19} className="text-white"/> }];
 
 export const NavigationSidebar = () => {
   return (
@@ -39,17 +37,6 @@ export const NavigationSidebar = () => {
 
       <div className="flex flex-col items-center">
         <ModeToggle />
-      </div>
-
-      <div className="flex flex-col gap-3">
-        {menuIconMapBottom.map((menu) => (
-          <NavigationItem 
-            key={menu.id} 
-            icon={menu.icon} 
-            id={menu.id} 
-            url=""
-            />
-        ))}
       </div>
     </div>
   );

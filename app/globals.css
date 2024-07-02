@@ -5,6 +5,7 @@ html,
 body,
 :root {
   height: 100%;
+  font-size: var(--zadark-cnv-font-size);
 }
 ::-webkit-scrollbar {
   width: 5px;

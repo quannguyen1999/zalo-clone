@@ -3,15 +3,17 @@ import ContactItem from "./contact-item";
 
 export const ContactBody = () => {
     const data = [
-        {
-            id: 1,
-            icon: <BookUser className="text-gray-600"/>,
-            value: "Danh sách bạn bè"
-        },
+        // {
+        //     id: 1,
+        //     icon: <BookUser className="text-gray-600"/>,
+        //     value: "Danh sách bạn bè",
+        //     url: '/contact'
+        // },
         {
             id: 2,
             icon: <SmileIcon className="text-gray-600"/>,
-            value: "Lời mời kết bạn"
+            value: "Lời mời kết bạn",
+            url: '/contact/list-request'
         },
         
         
@@ -23,6 +25,7 @@ export const ContactBody = () => {
                 <ContactItem key={value.id}
                     icon={value.icon}
                     value={value.value}
+                    url={value.url}
                 />
             ))
            }

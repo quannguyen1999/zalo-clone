@@ -36,6 +36,7 @@ export const ChatItem = ({
   conversationId,
   latestMessage
 }: ChatItemProps) => {
+  const [nameProfileCut, setNameProfileCut] = useState(nameProfile);
   const {socket} = useSocket();
   const router = useRouter();
   const [isOnline, setIsOnline] = useState(false);
@@ -43,8 +44,13 @@ export const ChatItem = ({
   const [latestMessageContent, setLatestMessageContent] = useState(latestMessage);
 
   useEffect(()=>{
-    // const addKey = `conversation:${conversationId}:messages`;
+  
     if(type == 'listFriend'){
+    
+      if (nameProfile.length > 10) {
+        setNameProfileCut(nameProfile.slice(0, 10) + '...');
+      } 
+
       socket.on('profileId:' + id, (status: any ) => {
         setIsOnline(true);
       });
@@ -108,6 +114,7 @@ export const ChatItem = ({
       className="flex flex-row w-full 
         h-[70px] cursor-pointer
         hover:bg-gray-100
+        bg-white
         transition-all
         group
     "
@@ -140,7 +147,7 @@ export const ChatItem = ({
             dark:group-hover:text-black
           "
           >
-            {nameProfile}
+            {nameProfileCut}
           </p>
         </div>
         <div>

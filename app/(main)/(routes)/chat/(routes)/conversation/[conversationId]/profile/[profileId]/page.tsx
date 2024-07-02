@@ -14,9 +14,7 @@ interface ConversationPageProp {
     profileId: string;
   };
 }
-interface ProfileProps {
-  id: string;
-}
+
 export const ConversationId = ({ params }: ConversationPageProp) => {
 
   return (

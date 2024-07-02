@@ -1,14 +1,25 @@
-import { Plus } from "lucide-react";
+'use client'
+
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+
 interface ContactItemProps {
     icon: any;
     value: string;
+    url: string;
 }
 export const ContactItem = ({
     icon,
-    value
+    value,
+    url
 }: ContactItemProps) => {
+    const router = useRouter();
+    const redirectToChat = async () => {
+        router.push(url);
+    }
     return (
-        <div className="flex flex-row p-4 gap-4 cursor-pointer hover:bg-gray-300">
+        <div className="flex flex-row p-4 gap-4 cursor-pointer hover:bg-gray-100" 
+        onClick={() => redirectToChat()}>
             <div>
                 {icon}
             </div>
