@@ -1,6 +1,6 @@
 import { MobileToggle } from "@/components/mobile-toggle";
 
-export const ChatPage = () => {
+const ChatPage = () => {
   return (
     <div className="h-full flex flex-col text-center justify-center">
       <div className="absolute top-1 left-1">

@@ -1,10 +1,5 @@
 'use client'
 import MessageBody from "@/components/message/message-body";
-import MessageMain from "@/components/message/message-main";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import qs from "query-string";
-import { db } from "@/lib/db";
 import MessageHeader from "@/components/message/message-header";
 import MessageInput from "@/components/message/message-input";
 import { currentProfile } from "@/lib/current-profile";
@@ -15,7 +10,7 @@ interface ConversationPageProp {
   };
 }
 
-export const ConversationId = ({ params }: ConversationPageProp) => {
+const ConversationId = async ({ params }: ConversationPageProp) => {
 
   return (
     <div className=" h-full w-full">

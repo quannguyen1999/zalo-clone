@@ -1,13 +1,12 @@
 'use client'
 import { ChatSidebar } from "@/components/chat/chat-sidebar"
 import MessageBody from "@/components/message/message-body";
-import { Main } from "next/document";
 import { useEffect } from "react";
 
 import { currentProfile } from "@/lib/current-profile";
 import axios from "axios";
 import queryString from "query-string";
-export const ChatLayout = ({
+const ChatLayout = ({
     children
 }: {
     children: React.ReactNode
