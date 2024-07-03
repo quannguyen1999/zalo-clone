@@ -55,6 +55,14 @@ export const AddFriendModal = () => {
   const handleKeyDown = async (e: any) => {
     setLoading(true);
     if (e.code === "Enter") {
+      searchContact();
+    }
+    setLoading(false);
+  };
+
+  const searchContact = async () => {
+    setLoading(true);
+  
       const url = qs.stringifyUrl({
         url: "/api/profile",
         query: {
@@ -65,7 +73,7 @@ export const AddFriendModal = () => {
       const result = await axios.get(url);
 
       setContacts(result.data?.items);
-    }
+    
     setLoading(false);
   };
 
@@ -73,15 +81,20 @@ export const AddFriendModal = () => {
     <Dialog open={isModalOpen} onOpenChange={handleClose}>
       <DialogContent
         className="bg-white text-black 
-      p-0 overflow-hidden w-[400px] transition-all"
+      p-0 overflow-hidden w-[400px] transition-all
+      dark:bg-gray-800
+      "
       >
         <DialogHeader className="pt-5 px-6">
-          <DialogTitle className="text-base text-center">Thêm Bạn</DialogTitle>
+          <DialogTitle className="text-base text-center dark:text-white">Thêm Bạn</DialogTitle>
           <Input
             type="search"
             placeholder="Search contact..."
             className="focus-visible:ring-0 h-[35px] 
-                           focus-visible:ring-offset-0"
+                           focus-visible:ring-offset-0
+                           dark:bg-gray-600
+                           dark:text-white
+                           "
             onChange={(e) => setEmailSearch(e.target.value)}
             onKeyDown={handleKeyDown}
           />
@@ -99,7 +112,7 @@ export const AddFriendModal = () => {
                 {contacts.length <= 0 ? (
                   <div
                     className="h-60 w-full flex items-center
-                  justify-center 
+                  justify-center  dark:text-white
                 "
                   >
                     <p>No Data</p>
@@ -124,11 +137,11 @@ export const AddFriendModal = () => {
             )}
           </div>
         </DialogHeader>
-        <DialogFooter className="bg-gray-100 px-6 py-4">
-          <Button type="submit" className="bg-gray-400">
+        <DialogFooter className="bg-gray-100 dark:bg-gray-800 px-6 py-4">
+          <Button type="submit" className="bg-gray-400 dark:bg-gray-900 dark:text-white dark:hover:bg-gray-700" onClick={() => handleClose()}>
             Hủy
           </Button>
-          <Button type="submit" className="bg-blue-600">
+          <Button type="submit" className="bg-blue-600 dark:bg-gray-900 dark:text-white dark:hover:bg-gray-700" onClick={() => searchContact()}>
             Tìm Kiếm
           </Button>
         </DialogFooter>

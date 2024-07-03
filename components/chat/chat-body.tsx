@@ -17,7 +17,6 @@ interface ProfileProps {
 export const ChatBody = () => {
   const [friends, setFriends] = useState([]);
   const [loading, setLoading] = useState(true);
-  const isUser = useRef<string>("")
 
   useEffect(() => {
     const fetchFriends = async () => {

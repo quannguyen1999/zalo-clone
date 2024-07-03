@@ -11,7 +11,7 @@ export const ContactBody = () => {
         // },
         {
             id: 2,
-            icon: <SmileIcon className="text-gray-600"/>,
+            icon: <SmileIcon className="text-gray-600 dark:text-white"/>,
             value: "Lời mời kết bạn",
             url: '/contact/list-request'
         },
@@ -19,7 +19,7 @@ export const ContactBody = () => {
         
     ];
     return (
-        <div className="h-full overflow-auto">
+        <div className="h-full overflow-auto dark:bg-gray-700">
            {
             data.map((value)=> (
                 <ContactItem key={value.id}

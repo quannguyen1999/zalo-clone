@@ -15,7 +15,7 @@ const menuIconMapTop = [
 export const NavigationSidebar = () => {
   return (
     <div className="w-full h-full bg-blue-500 
-        dark:bg-gray-600 flex 
+        dark:bg-gray-800 flex 
         flex-col gap-2 p-2">
       <UserButton
         appearance={{

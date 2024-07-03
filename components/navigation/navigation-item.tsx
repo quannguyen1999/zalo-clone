@@ -33,6 +33,8 @@ export const NavigationItem = ({
                 bg-blue-500 
                 hover:rounded-[16px] transition-all
                 border border-white
+                dark:bg-gray-700 dark:hover:bg-gray-900
+                dark:border-none
                 ">
                     {icon}
                 </div>

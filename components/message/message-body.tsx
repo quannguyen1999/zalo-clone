@@ -59,7 +59,7 @@ export const MessageBody = ({
   }
 
   return (
-    <div ref={chatRef} className="flex-1 flex flex-col overflow-y-auto">
+    <div ref={chatRef} className="flex-1 flex flex-col overflow-y-auto dark:bg-gray-800">
       {hasNextPage && (
         <div className="flex justify-center">
           {isFetchingNextPage ? (

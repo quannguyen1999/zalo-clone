@@ -39,6 +39,7 @@ export const MessageInput = ({ conversationId }: ConversationProps) => {
         h-14
         flex flex-row
         relative
+        dark:bg-gray-900
         "
     >
       <Input
@@ -50,12 +51,13 @@ export const MessageInput = ({ conversationId }: ConversationProps) => {
                     rounded-none
                     focus-visible:ring-offset-0
                     pl-5
+                    dark:bg-gray-900
                 "
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         onKeyDown={handleKeyDown}
       />
-      <div className="w-[70px]">
+      <div className="w-[70px] ">
         <div
           className="absolute 
                     text-center justify-center
@@ -68,10 +70,10 @@ export const MessageInput = ({ conversationId }: ConversationProps) => {
           />
         </div>
         <div
-          className="absolute text-center justify-center top-3 right-4 cursor-pointer text-gray-600"
+          className="absolute text-center justify-center top-3 right-4 cursor-pointer  text-gray-600"
           onClick={() => sendLike()}
         >
-          <div className="inline-block rounded-full overflow-hidden text-lg">
+          <div className="inline-block rounded-full overflow-hidden text-lg ">
             👍
           </div>
         </div>

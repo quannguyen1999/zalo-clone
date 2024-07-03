@@ -2,6 +2,7 @@
 import {
   Annoyed,
   BookUser,
+  ChevronRight,
   CircleOff,
   Loader2,
   Plus,
@@ -221,9 +222,10 @@ export const ContactDetail = () => {
   return (
     <>
       {!loading ? (
-        <div className="h-full overflow-auto flex flex-col pl-5 bg-gray-50">
-          <div>
-            <h1>Chờ Chấp Nhận</h1>
+        <div className="h-full overflow-auto flex flex-col pl-5 pt-4 bg-gray-50 dark:bg-gray-800">
+          <div className="flex flex-row">
+            <h1>Chờ Chấp Nhận </h1>
+            <ChevronRight />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {contactApprove.map((value: ProfileProps) => (
@@ -248,8 +250,9 @@ export const ContactDetail = () => {
                 <div>Bạn Không có Lời Mời Nào</div>
               </div>
             )}
-          <div>
-            <h1>Chờ Yêu Cầu</h1>
+            <div className="flex flex-row">
+            <h1>Chờ Yêu Cầu </h1>
+            <ChevronRight />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {contactRequest.map((value: ProfileProps) => (

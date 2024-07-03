@@ -16,12 +16,14 @@ export const ContactHeader = ({
                  border-b border-gray-300
                  justify-center items-center
                  pl-5
+                 dark:bg-gray-800
+                 
                 "
     >
       <MobileToggle />
       {icon}
       <div className="flex-1 flex flex-col p-1 pl-2">
-        <p className="text-gray-600">{label}</p>
+        <p className="text-gray-600 dark:text-white">{label}</p>
       </div>
     </div>
   );

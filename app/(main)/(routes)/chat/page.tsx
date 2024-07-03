@@ -2,7 +2,7 @@ import { MobileToggle } from "@/components/mobile-toggle";
 
 export const ChatPage = () => {
   return (
-    <div className="h-full flex flex-col text-center justify-center">
+    <div className="h-full flex flex-col text-center justify-center dark:bg-gray-700">
       <div className="absolute top-1 left-1">
         <MobileToggle />
       </div>

@@ -115,6 +115,9 @@ export const ChatItem = ({
         h-[70px] cursor-pointer
         hover:bg-gray-100
         bg-white
+        dark:hover:bg-gray-600
+        dark:bg-gray-700
+        dark:hover:text-white
         transition-all
         group
     "
@@ -144,7 +147,7 @@ export const ChatItem = ({
           <p
             className="text-sm text-gray-600
             dark:text-white 
-            dark:group-hover:text-black
+            dark:group-hover:text-white 
           "
           >
             {nameProfileCut}
@@ -249,7 +252,7 @@ export const ChatItem = ({
             )}
           </>
         ) : (
-          <p>1 hour</p>
+          <p className="dark:group-hover:text-white">1 hour</p>
         )}
       </div>
     </div>

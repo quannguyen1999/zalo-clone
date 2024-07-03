@@ -18,7 +18,7 @@ export const ContactItem = ({
         router.push(url);
     }
     return (
-        <div className="flex flex-row p-4 gap-4 cursor-pointer hover:bg-gray-100" 
+        <div className="flex flex-row p-4 gap-4 cursor-pointer hover:bg-gray-100 dark:text-white dark:hover:bg-gray-600" 
         onClick={() => redirectToChat()}>
             <div>
                 {icon}

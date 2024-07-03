@@ -2,7 +2,7 @@ import ContactDetail from "@/components/contact/contact-detail";
 import ContactHeader from "@/components/contact/contact-header";
 import { SmileIcon, SmilePlus } from "lucide-react";
 const contactInfo = {
-    icon: <SmilePlus className="text-gray-600"/>,
+    icon: <SmilePlus className="text-gray-600 dark:text-white"/>,
     label: "Lời mời kết bạn",
 }
 export const ListRequest = () => {
