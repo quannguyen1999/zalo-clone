@@ -3,6 +3,7 @@ import axios from "axios";
 import { ChatItem } from "./chat-item";
 import { useEffect, useRef, useState } from "react";
 import { Loader2 } from "lucide-react";
+import { useContactModal } from "@/hook/user-contact-store";
 interface ProfileProps {
   id: string;
   userId: string;
@@ -17,6 +18,13 @@ interface ProfileProps {
 export const ChatBody = () => {
   const [friends, setFriends] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // data: [],
+  // isRefresh: false,
+  // setData: (data = []) => set({data: data}),
+  // setRefresh: (value = false) => set({isRefresh: false}),
+  //TODO
+  // const {data, isRefresh, setData, setRefresh} = useContactModal();
 
   useEffect(() => {
     const fetchFriends = async () => {

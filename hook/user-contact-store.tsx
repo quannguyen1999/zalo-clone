@@ -9,11 +9,13 @@ interface ContactItemProps {
 interface ModalStore {
     data: ContactItemProps[];
     isRefresh: boolean;
-    refresh: (data: ContactItemProps[]) => void;
+    setData: (data: ContactItemProps[]) => void;
+    setRefresh: (value: boolean) => void;
 }
 
 export const useContactModal = create<ModalStore>((set) => ({
     data: [],
     isRefresh: false,
-    refresh: (data = []) => set({data: data}),
+    setData: (data = []) => set({data: data}),
+    setRefresh: (value = false) => set({isRefresh: false}),
 }))
