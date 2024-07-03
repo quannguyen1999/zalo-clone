@@ -36,7 +36,6 @@ export const ChatItem = ({
   conversationId,
   latestMessage
 }: ChatItemProps) => {
-  const [nameProfileCut, setNameProfileCut] = useState(nameProfile);
   const {socket} = useSocket();
   const router = useRouter();
   const [isOnline, setIsOnline] = useState(false);
@@ -44,13 +43,7 @@ export const ChatItem = ({
   const [latestMessageContent, setLatestMessageContent] = useState(latestMessage);
 
   useEffect(()=>{
-  
     if(type == 'listFriend'){
-    
-      if (nameProfile.length > 10) {
-        setNameProfileCut(nameProfile.slice(0, 10) + '...');
-      } 
-
       socket.on('profileId:' + id, (status: any ) => {
         setIsOnline(true);
       });
@@ -149,14 +142,14 @@ export const ChatItem = ({
             dark:group-hover:text-white 
           "
           >
-            {nameProfileCut}
+            {nameProfile.slice(0,10) + '...'}
           </p>
         </div>
         <div>
           {type === "addFriend" ? (
-            <p className="text-[10px] text-gray-400">{email}</p>
+            <p className="text-[10px] text-gray-400">{email.slice(0,10) + '...'}</p>
           ) : (
-            <p className="text-sm text-gray-400">{latestMessageContent || 'Start chat...'}</p>
+            <p className="text-sm text-gray-400">{latestMessageContent?.slice(0,10) + '...' || 'Start chat...'}</p>
           )}
         </div>
       </div>
