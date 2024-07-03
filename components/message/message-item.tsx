@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils"
 interface ProfileProps {
   id: string;
   content: string;
@@ -13,11 +14,19 @@ const MessageItem = ({
   return (
     <>
       {profileId != currentProfileId ? (
-        <div className="flex flex-row justify-end items-end pr-3 py-1">
+        <div 
+        className={cn(
+          "flex flex-row justify-end  pr-3 py-1",
+          profileId != currentProfileId ? 'items-end' : 'items-start'
+        )}
+        >
           <div
             className="flex flex-col border border-1 border-solid
          border-gray-200 p-2 rounded-lg relative
+         dark:bg-gray-900
+         dark:border-none
          "
+         
           >
             <div className="text-base">{content}</div>
           </div>
@@ -27,7 +36,8 @@ const MessageItem = ({
           <div
             className="flex flex-col border border-1 border-solid
          border-gray-200 p-2 rounded-lg relative
-         
+         dark:bg-gray-900
+         dark:border-none
          "
           >
             <div className="text-base">{content}</div>

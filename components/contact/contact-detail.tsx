@@ -279,7 +279,7 @@ export const ContactDetail = () => {
             )}
         </div>
       ) : (
-        <div className="h-full overflow-auto flex flex-col pl-5 bg-gray-50 justify-center items-center">
+        <div className="h-full overflow-auto flex flex-col pl-5 bg-gray-50 dark:bg-gray-800 justify-center items-center">
           <div className="flex flex-col flex-1 justify-center items-center">
             <Loader2 className="h-7 w-7 text-zinc-500 animate-spin my-4" />
             <p className="text-xs text-zinc-500 dark:text-zinc-400">
