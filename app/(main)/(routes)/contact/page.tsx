@@ -1,6 +1,4 @@
-import { MobileToggle } from "@/components/mobile-toggle";
-
-export const ContactPage = () => {
+const ContactPage = () => {
     return <div>
         contact page
     </div>

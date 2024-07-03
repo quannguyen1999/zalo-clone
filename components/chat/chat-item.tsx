@@ -56,7 +56,6 @@ export const ChatItem = ({
       });
 
       socket.on(`conversation:${conversationId}:messages`,  (message: any)  => {
-        console.log("Call")
         setLatestMessageContent(message.content);
       });
     }
