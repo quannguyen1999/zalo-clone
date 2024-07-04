@@ -16,35 +16,28 @@ interface ProfileProps {
   latestMessage: string;
 }
 export const ChatBody = () => {
-  const [friends, setFriends] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  // data: [],
-  // isRefresh: false,
-  // setData: (data = []) => set({data: data}),
-  // setRefresh: (value = false) => set({isRefresh: false}),
-  //TODO
-  // const {data, isRefresh, setData, setRefresh} = useContactModal();
+  const {data, isRefresh, setData, setRefresh} = useContactModal();
 
   useEffect(() => {
     const fetchFriends = async () => {
       try {
         const response = await axios.get("/api/conversation");
-
-        setFriends(response.data.items);
-
-       
+        setData(response.data.items);
       } catch (error) {
         console.error("Error fetching friends:", error);
       }
-      setLoading(false);
+      setRefresh(false);
     };
-    fetchFriends();
+
+    if(isRefresh){
+      fetchFriends();
+    }
+   
   }, []);
 
   return (
     <div className="h-full overflow-auto">
-      {loading &&
+      {isRefresh &&
   <div className="flex flex-col flex-1 justify-center items-center">
   <Loader2 className="h-7 w-7 text-zinc-500 animate-spin my-4" />
   <p className="text-xs text-zinc-500 dark:text-zinc-400">
@@ -52,8 +45,7 @@ export const ChatBody = () => {
   </p>
 </div>
       }
-    
-      {friends.map((value: ProfileProps) => (
+      {data.map((value: ProfileProps) => (
         <ChatItem
           key={value.id}
           type="listFriend"
