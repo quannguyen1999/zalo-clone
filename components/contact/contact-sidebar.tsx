@@ -8,7 +8,6 @@ export const ContactSidebar = () => {
         dark:bg-[#282D31] bg-white
         border-r border-gray-300 dark:border-gray-700
         ">
-      <ChatHeader />
       <ContactBody />
     </div>
   );

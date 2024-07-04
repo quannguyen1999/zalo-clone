@@ -5,7 +5,7 @@ import axios from "axios";
 import qs from "query-string";
 import { db } from "@/lib/db";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 import { currentProfile } from "@/lib/current-profile";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -34,27 +34,26 @@ export const ChatItem = ({
   status,
   friendRequestId,
   conversationId,
-  latestMessage
+  latestMessage,
 }: ChatItemProps) => {
-  const {socket} = useSocket();
+  const { socket } = useSocket();
   const router = useRouter();
   const [isOnline, setIsOnline] = useState(false);
 
-  const [latestMessageContent, setLatestMessageContent] = useState(latestMessage);
+  const [latestMessageContent, setLatestMessageContent] =
+    useState(latestMessage);
 
-  useEffect(()=>{
-    if(type == 'listFriend'){
-      socket.on('profileId:' + id, (status: any ) => {
+  useEffect(() => {
+    if (type == "listFriend") {
+      socket.on("profileId:" + id, (status: any) => {
         setIsOnline(true);
       });
 
-      socket.on(`conversation:${conversationId}:messages`,  (message: any)  => {
+      socket.on(`conversation:${conversationId}:messages`, (message: any) => {
         setLatestMessageContent(message.content);
       });
     }
-    
-  }, [])
-
+  }, []);
 
   const [currentStatus, setCurrentStatus] = useState(status);
 
@@ -82,6 +81,18 @@ export const ChatItem = ({
     setCurrentStatus("");
   };
 
+  const rejectFriend = async () => {
+    const url = qs.stringifyUrl({
+      url: "/api/conversation/reject",
+      query: {
+        friendRequestId: friendRequestId,
+      },
+    });
+
+    await axios.get(url);
+    setCurrentStatus("");
+  };
+
   const acceptFriend = async () => {
     const url = qs.stringifyUrl({
       url: "/api/conversation/accept",
@@ -95,11 +106,10 @@ export const ChatItem = ({
   };
 
   const redirectToChat = async () => {
-    if(type != 'listFriend'){
-      return;
+    if (type == "listFriend") {
+      router.push(`/chat/conversation/${conversationId}/profile/${id}`);
     }
-    router.push(`/chat/conversation/${conversationId}/profile/${id}`);
-  }
+  };
 
   return (
     <div
@@ -113,26 +123,32 @@ export const ChatItem = ({
         transition-all
         group
     "
-    onClick={redirectToChat}
+      onClick={redirectToChat}
     >
       <div className="p-2 ">
-      <div
-      className="relative"
-    >
-      <div   className="relative 
+        <div className="relative">
+          <div
+            className="relative 
         rounded-full 
         overflow-hidden
         border 
         bg-secondary
-        h-12 w-12">
-        <Image src={imageUrl} alt="User Avatar" fill className="object-cover" />
-    
-      </div>
-        <div
-        
-        className={cn("absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-white", isOnline ? 'bg-green-500' : 'bg-red-500',)}></div>
-    
-    </div>
+        h-12 w-12"
+          >
+            <Image
+              src={imageUrl}
+              alt="User Avatar"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div
+            className={cn(
+              "absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-white",
+              isOnline ? "bg-green-500" : "bg-red-500"
+            )}
+          ></div>
+        </div>
       </div>
       <div className="flex-1 flex flex-col mt-2">
         <div>
@@ -142,14 +158,16 @@ export const ChatItem = ({
             dark:group-hover:text-white 
           "
           >
-            {nameProfile.slice(0,10) + '...'}
+            {nameProfile.slice(0, 10) + "..."}
           </p>
         </div>
         <div>
           {type === "addFriend" ? (
-            <p className="text-[10px] text-gray-400">{email.slice(0,10) + '...'}</p>
+            <p className="text-[10px] text-gray-400">{email}</p>
           ) : (
-            <p className="text-sm text-gray-400">{latestMessageContent?.slice(0,10) + '...' || 'Start chat...'}</p>
+            <p className="text-sm text-gray-400">
+              {latestMessageContent?.slice(0, 10) + "..." || "Start chat..."}
+            </p>
           )}
         </div>
       </div>
@@ -178,7 +196,7 @@ export const ChatItem = ({
                 h-8 w-12 border-1 border-black
                 hover:bg-red-300
           "
-                  onClick={cancelFriend}
+                  onClick={rejectFriend}
                 >
                   Bỏ cuộc
                 </Button>

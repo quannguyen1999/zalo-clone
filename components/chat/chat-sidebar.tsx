@@ -8,7 +8,6 @@ export  const ChatSidebar = () => {
         dark:bg-gray-700 bg-white
         border-r border-gray-300 dark:border-gray-900
         ">
-            <ChatHeader />
             <ChatBody />
         </div> 
     )

@@ -29,26 +29,29 @@ export async function GET(
         if(type === 'approve'){
             listSentRequestFriend = await db.friendRequest.findMany({
                 where: {
-                    receiverId: currentProfileData?.id
+                    receiverId: currentProfileData?.id,
+                    status: 'pending'
                 }
             })
+
         }else{
             listSentRequestFriend = await db.friendRequest.findMany({
                 where: {
-                    senderId: currentProfileData?.id
+                    senderId: currentProfileData?.id,
+                    status: 'pending'
                 }
             })
 
         }
        
 
-        const listProfile = await db.profile.findMany({
+        const listProfile =await db.profile.findMany({
             where: {
                 id: {
-                    in: listSentRequestFriend.filter(t => t.senderId).map(t=> t.id)
+                    in: listSentRequestFriend.map(t=>  type === 'approve' ? t.senderId : t.receiverId)
                 },
             }   
-        })
+        });
 
         listProfile.map(value => {
             const profileProps: ProfileProps = {
@@ -57,8 +60,8 @@ export async function GET(
                 name: value.name,
                 imageUrl: value.imageUrl,
                 email: value.email,
-                status: '',
-                friendRequestId: ''
+                status: type === 'approve' ? 'receivedRequest' : 'pending',
+                friendRequestId: value.id
             }
 
             listReturnResultProfile.push(profileProps);
