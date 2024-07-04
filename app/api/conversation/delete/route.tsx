@@ -22,9 +22,12 @@ export async function GET(
 
         const dataDelete = await db.friendRequest.findFirst({
             where: {
+                senderId: profile.id,
                 receiverId: friendRequestId
             }
         })
+
+        console.log(dataDelete)
 
         if(dataDelete != null){
             await db.friendRequest.delete({

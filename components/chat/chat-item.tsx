@@ -69,7 +69,7 @@ export const ChatItem = ({
     setCurrentStatus("pending");
   };
 
-  const cancelFriend = async () => {
+  const cancelRequestFriend = async () => {
     const url = qs.stringifyUrl({
       url: "/api/conversation/delete",
       query: {
@@ -196,7 +196,7 @@ export const ChatItem = ({
                 h-8 w-12 border-1 border-black
                 hover:bg-red-300
           "
-                  onClick={rejectFriend}
+                  onClick={cancelRequestFriend}
                 >
                   Bỏ cuộc
                 </Button>
@@ -220,12 +220,13 @@ export const ChatItem = ({
 
             {currentStatus === "" && (
               <Button
-                className=" text-blue-500 
+                className=" text-blue-400 
             border 
             bg-gray-200
-            h-22 w-22 border-1 border-black
+            h-9 w-14 border-1 border-black
             hover:bg-blue-200
-              "
+            text-xs 
+            "
                 onClick={addFriend}
               >
                 Kết bạn
@@ -254,7 +255,7 @@ export const ChatItem = ({
                   h-8 w-10 border-1 border-black
                   hover:bg-red-300
             "
-                  onClick={cancelFriend}
+                  onClick={rejectFriend}
                 >
                   Cút
                 </Button>

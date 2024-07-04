@@ -64,6 +64,7 @@ export const ContactDetail = () => {
       setContactRequest(resultRequest.data?.items);
 
       setLoading(false);
+      
     };
 
     loadListFriendApprove();

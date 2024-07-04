@@ -128,7 +128,7 @@ export const AddFriendModal = () => {
                         email={value.email}
                         id={value.id}
                         status={value.status}
-                        friendRequestId={value.friendRequestId}
+                        friendRequestId={value.id}
                       />
                     ))}
                   </div>
